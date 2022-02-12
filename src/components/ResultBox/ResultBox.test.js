@@ -26,7 +26,24 @@ import { convertUSDToPLN } from '../../utils/convertUSDToPLN';
         cleanup();
         }
       });
-      it('should render proper info about conversion when USD -> PLN', () => {
+    //   it('should render proper info about conversion when USD -> PLN', () => {
+
+    //     const testCases = [
+    //         { amount: 10 },
+    //         { amount: 150 },
+    //         { amount: 188 },
+    //         { amount: 12 },
+    //     ];
+
+    //     for(const testObj of testCases) {
+    //     render(<ResultBox from="USD" to="PLN" amount={testObj.amount} />);
+    //     const divX = screen.getByTestId('divX');
+    //     const x = convertUSDToPLN(testObj.amount);
+    //     expect(divX).toHaveTextContent('$' + testObj.amount + '.00 = ' + x);
+    //     cleanup();
+    //     }
+    //   });
+    it('should render the same value for PLN', () => {
 
         const testCases = [
             { amount: 10 },
@@ -36,11 +53,26 @@ import { convertUSDToPLN } from '../../utils/convertUSDToPLN';
         ];
 
         for(const testObj of testCases) {
-        render(<ResultBox from="USD" to="PLN" amount={testObj.amount} />);
+        render(<ResultBox from="PLN" to="PLN" amount={testObj.amount} />);
         const divX = screen.getByTestId('divX');
-        const x = convertUSDToPLN(testObj.amount);
-        expect(divX).toHaveTextContent('$' + testObj.amount + '.00 = ' + x);
+        expect(divX).toHaveTextContent('PLN ' + testObj.amount + '.00 = PLN ' + testObj.amount);
         cleanup();
         }
       });
+    it('should render the same value for USD', () => {
+
+        const testCases = [
+            { amount: 10 },
+            { amount: 150 },
+            { amount: 188 },
+            { amount: 12 },
+        ];
+
+        for(const testObj of testCases) {
+        render(<ResultBox from="USD" to="USD" amount={testObj.amount} />);
+        const divX = screen.getByTestId('divX');
+        expect(divX).toHaveTextContent('$' + testObj.amount + '.00 = $' + testObj.amount);
+        cleanup();
+        }
+      });  
 });
